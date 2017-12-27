@@ -169,7 +169,7 @@ NS_ASSUME_NONNULL_END
         return 1;
     }
     if ([_datesWithMultipleEvents containsObject:dateString]) {
-        return 3;
+        return 8;
     }
     return 0;
 }

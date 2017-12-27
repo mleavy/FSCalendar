@@ -12,6 +12,9 @@
 #import "FSCalendarDynamicHeader.h"
 #import "FSCalendarConstants.h"
 
+#define EventsPerRow 4
+#define MaxEvents 12
+
 @interface FSCalendarCell ()
 
 @property (readonly, nonatomic) UIColor *colorForCellFill;
@@ -46,7 +49,7 @@
 }
 
 - (void)commonInit
-{   
+{
     UILabel *label;
     CAShapeLayer *shapeLayer;
     UIImageView *imageView;
@@ -150,8 +153,8 @@
                                        self.preferredEventOffset.x,
                                        CGRectGetMaxY(_shapeLayer.frame)+eventSize*0.17+self.preferredEventOffset.y,
                                        self.fs_width,
-                                       eventSize*0.83
-                                      );
+                                       (eventSize*0.83) * (MaxEvents / EventsPerRow)
+                                       );
     
 }
 
@@ -254,7 +257,7 @@
     
     _eventIndicator.numberOfEvents = self.numberOfEvents;
     _eventIndicator.color = self.colorsForEvents;
-
+    
 }
 
 - (UIColor *)colorForCurrentStateInDictionary:(NSDictionary *)dictionary
@@ -330,16 +333,16 @@
 \
 - (void)set##CAPITAL:(CGPoint)NAME \
 { \
-    BOOL diff = !CGPointEqualToPoint(NAME, self.NAME); \
-    _##NAME = NAME; \
-    if (diff) { \
-        [self setNeedsLayout]; \
-    } \
+BOOL diff = !CGPointEqualToPoint(NAME, self.NAME); \
+_##NAME = NAME; \
+if (diff) { \
+[self setNeedsLayout]; \
+} \
 } \
 \
 - (CGPoint)NAME \
 { \
-    return CGPointEqualToPoint(_##NAME, CGPointInfinity) ? ALTERNATIVE : _##NAME; \
+return CGPointEqualToPoint(_##NAME, CGPointInfinity) ? ALTERNATIVE : _##NAME; \
 }
 
 OFFSET_PROPERTY(preferredTitleOffset, PreferredTitleOffset, _appearance.titleOffset);
@@ -378,6 +381,7 @@ OFFSET_PROPERTY(preferredEventOffset, PreferredEventOffset, _appearance.eventOff
 
 @property (strong, nonatomic) NSPointerArray *eventLayers;
 
+
 @end
 
 @implementation FSCalendarEventIndicator
@@ -387,12 +391,13 @@ OFFSET_PROPERTY(preferredEventOffset, PreferredEventOffset, _appearance.eventOff
     self = [super initWithFrame:frame];
     if (self) {
         
+        
         UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
         [self addSubview:view];
         self.contentView = view;
         
         self.eventLayers = [NSPointerArray weakObjectsPointerArray];
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < MaxEvents; i++) {
             CALayer *layer = [CALayer layer];
             layer.backgroundColor = [UIColor clearColor].CGColor;
             [self.contentView.layer addSublayer:layer];
@@ -408,7 +413,8 @@ OFFSET_PROPERTY(preferredEventOffset, PreferredEventOffset, _appearance.eventOff
     [super layoutSubviews];
     CGFloat diameter = MIN(MIN(self.fs_width, self.fs_height),FSCalendarMaximumEventDotDiameter);
     self.contentView.fs_height = self.fs_height;
-    self.contentView.fs_width = (self.numberOfEvents*2-1)*diameter;
+    NSInteger eventsPerRow = MIN(MAX(_numberOfEvents,0),EventsPerRow);
+    self.contentView.fs_width = (eventsPerRow*2-1)*diameter;
     self.contentView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
 }
 
@@ -418,15 +424,25 @@ OFFSET_PROPERTY(preferredEventOffset, PreferredEventOffset, _appearance.eventOff
     if (layer == self.layer) {
         
         CGFloat diameter = MIN(MIN(self.fs_width, self.fs_height),FSCalendarMaximumEventDotDiameter);
+        int rowCount = 0;
+        int yOffset = 0;
         for (int i = 0; i < self.eventLayers.count; i++) {
+            
+            if (rowCount >= EventsPerRow) {
+                rowCount = 0;
+                yOffset += diameter + 2;
+            }
             CALayer *eventLayer = [self.eventLayers pointerAtIndex:i];
             eventLayer.hidden = i >= self.numberOfEvents;
             if (!eventLayer.hidden) {
                 eventLayer.frame = CGRectMake(2*i*diameter, (self.fs_height-diameter)*0.5, diameter, diameter);
+                eventLayer.frame = CGRectMake(2*rowCount*diameter, 1 + yOffset, diameter, diameter);
                 if (eventLayer.cornerRadius != diameter/2) {
                     eventLayer.cornerRadius = diameter/2;
                 }
             }
+            
+            rowCount++;
         }
     }
 }
@@ -455,7 +471,7 @@ OFFSET_PROPERTY(preferredEventOffset, PreferredEventOffset, _appearance.eventOff
 - (void)setNumberOfEvents:(NSInteger)numberOfEvents
 {
     if (_numberOfEvents != numberOfEvents) {
-        _numberOfEvents = MIN(MAX(numberOfEvents,0),3);
+        _numberOfEvents = MIN(MAX(numberOfEvents,0),MaxEvents);
         [self setNeedsLayout];
     }
 }
