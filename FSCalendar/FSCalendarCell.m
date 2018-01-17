@@ -462,6 +462,10 @@ OFFSET_PROPERTY(preferredEventOffset, PreferredEventOffset, _appearance.eventOff
             for (int i = 0; i < self.eventLayers.count; i++) {
                 CALayer *eventLayer = [self.eventLayers pointerAtIndex:i];
                 eventLayer.backgroundColor = colors[MIN(i,colors.count-1)].CGColor;
+                //todo: remove
+//                eventLayer.borderColor = colors[MIN(i,colors.count-1)].CGColor;
+//                eventLayer.borderWidth = 1;
+//                eventLayer.backgroundColor = UIColor.clearColor.CGColor;
             }
         }
         
