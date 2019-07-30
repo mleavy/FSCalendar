@@ -75,6 +75,8 @@
         _weekdayHeaderButtonTitleColor = [UIColor whiteColor];
         _weekdayHeaderButtonBackgroundColor = [UIColor blueColor];
         _weekdayHeaderButtonPadding = 2;
+        _weekdayHeaderButtonDisabledAlpha = 0.1;
+        _weekdayHeaderButtonDisabledText = nil;
         
 #if TARGET_INTERFACE_BUILDER
         _fakeEventDots = YES;

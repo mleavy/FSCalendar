@@ -223,7 +223,8 @@ NSInteger const FSCalendarWeekdayItemButtonContainerTag = -97;
 
 - (void) setButtonTitle:(NSString *)title
 {
-    [self.button setTitle:title forState:UIControlStateNormal];
+    NSString *actualTitle = (title == nil || title.length == 0) ? self.calendar.appearance.weekdayHeaderButtonDisabledText : title;
+    [self.button setTitle:actualTitle forState:UIControlStateNormal];
 }
 
 - (void) setButtonIndex:(NSInteger)index
@@ -238,6 +239,13 @@ NSInteger const FSCalendarWeekdayItemButtonContainerTag = -97;
     
     [self.button removeTarget:self.calendar action:nil forControlEvents:UIControlEventTouchUpInside];
     [self.button addTarget:self.calendar action:@selector(didTapWeekdayButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    BOOL isEnabled = [self.button titleForState:UIControlStateNormal].length > 0;
+    if (isEnabled && self.calendar.appearance.weekdayHeaderButtonDisabledText != nil) {
+        isEnabled = ![[self.button titleForState:UIControlStateNormal] isEqualToString:self.calendar.appearance.weekdayHeaderButtonDisabledText];
+    }
+    [self.button setEnabled:isEnabled];
+    self.button.alpha = isEnabled ? 1 : self.calendar.appearance.weekdayHeaderButtonDisabledAlpha;
 }
 
 @end

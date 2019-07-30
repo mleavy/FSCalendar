@@ -43,7 +43,8 @@ class FSCalendarScopeExampleViewController: UIViewController, UITableViewDataSou
         self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)
         
         self.calendar.appearance.weekdayHeaderButtonBackgroundColor = UIColor.red
-        self.calendar.setHeaderButtonTitles(["1", "2", "-1", "0", "-2", "-3", "0"])
+        self.calendar.appearance.weekdayHeaderButtonDisabledText = "N/A"
+        self.calendar.setHeaderButtonTitles(["1", "2", "-1", "0", "-2", "", "0"])
         self.calendar.scope = .week
         
         // For UITest
@@ -92,6 +93,10 @@ class FSCalendarScopeExampleViewController: UIViewController, UITableViewDataSou
 
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         print("\(self.dateFormatter.string(from: calendar.currentPage))")
+    }
+    
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        return 20
     }
     
     // MARK:- UITableViewDataSource
