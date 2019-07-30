@@ -20,8 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (readonly, nonatomic) NSArray<UILabel *> *weekdayLabels;
 
+- (instancetype)initWithButtonTitles:(NSArray<NSString *>*)buttonTitles frame:(CGRect)frame;
 - (void)configureAppearance;
 
+@end
+
+@interface FSCalendarWeekdayButton: UIButton
+@property (assign, nonatomic) NSInteger index;
 @end
 
 NS_ASSUME_NONNULL_END

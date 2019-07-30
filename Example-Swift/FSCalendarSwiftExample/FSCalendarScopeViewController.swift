@@ -41,6 +41,9 @@ class FSCalendarScopeExampleViewController: UIViewController, UITableViewDataSou
         
         self.view.addGestureRecognizer(self.scopeGesture)
         self.tableView.panGestureRecognizer.require(toFail: self.scopeGesture)
+        
+        self.calendar.appearance.weekdayHeaderButtonBackgroundColor = UIColor.red
+        self.calendar.setHeaderButtonTitles(["1", "2", "-1", "0", "-2", "-3", "0"])
         self.calendar.scope = .week
         
         // For UITest
@@ -80,6 +83,11 @@ class FSCalendarScopeExampleViewController: UIViewController, UITableViewDataSou
         if monthPosition == .next || monthPosition == .previous {
             calendar.setCurrentPage(date, animated: true)
         }
+    }
+    
+    func calendarDidTapWeekdayButton(_ calendar: FSCalendar, index: Int) {
+        print("ouch \(index)")
+        self.calendar.setHeaderButtonTitles(["8", "2", "-1", "0", "-2", "-3", "0"])
     }
 
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {

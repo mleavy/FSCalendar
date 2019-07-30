@@ -154,6 +154,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)calendarCurrentPageDidChange:(FSCalendar *)calendar;
 
 /**
+ Tells the delegate that a weekday button has been tapped.
+ */
+- (void)calendarDidTapWeekdayButton:(FSCalendar *)calendar index:(NSInteger)index;
+
+/**
  These functions are deprecated
  */
 - (void)calendarCurrentScopeWillChange:(FSCalendar *)calendar animated:(BOOL)animated FSCalendarDeprecated(-calendar:boundingRectWillChange:animated:);
@@ -439,6 +444,7 @@ IB_DESIGNABLE
  */
 @property (readonly, nonatomic) NSArray<NSDate *> *selectedDates;
 
+
 /**
  Reload the dates and appearance of the calendar.
  */
@@ -451,6 +457,12 @@ IB_DESIGNABLE
  @param animated YES if you want to animate the scoping; NO if the change should be immediate.
  */
 - (void)setScope:(FSCalendarScope)scope animated:(BOOL)animated;
+
+/**
+ Optionally provide buttons for the weekday header. Array must be either
+ nil, or contain exactly 0 or 7 elements
+ */
+- (void)setHeaderButtonTitles:(NSArray<NSString *> *)buttonTitles;
 
 /**
  Selects a given date in the calendar.

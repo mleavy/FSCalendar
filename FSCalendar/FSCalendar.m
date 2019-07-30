@@ -87,6 +87,12 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
 @property (strong, nonatomic) NSIndexPath *lastPressedIndexPath;
 @property (strong, nonatomic) NSMapTable *visibleSectionHeaders;
 
+/**
+ An array of strings for the day header button views. Must be either
+ nil, or contain exactly 0 or 7 elements
+ */
+@property (strong, nonatomic) NSArray<NSString *> *dayHeaderButtonTitles;
+
 - (void)orientationDidChange:(NSNotification *)notification;
 
 - (CGSize)sizeThatFits:(CGSize)size scope:(FSCalendarScope)scope;
@@ -750,6 +756,14 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     [self setScope:scope animated:NO];
 }
 
+- (void)setHeaderButtonTitles:(NSArray<NSString *> *)buttonTitles
+{
+    self.dayHeaderButtonTitles = buttonTitles;
+    [_calendarWeekdayView removeFromSuperview];
+    _calendarWeekdayView = nil;
+    [self invalidateLayout];
+}
+
 - (void)setFirstWeekday:(NSUInteger)firstWeekday
 {
     if (_firstWeekday != firstWeekday) {
@@ -974,12 +988,13 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
 {
     if (_weekdayHeight == FSCalendarAutomaticDimension) {
         if (_preferredWeekdayHeight == FSCalendarAutomaticDimension) {
+            CGFloat standardWeekdayHeight = self.dayHeaderButtonTitles.count == 0 ? FSCalendarStandardWeekdayHeight : FSCalendarStandardWeekdayWithButtonsHeight;
             if (!self.floatingMode) {
                 CGFloat DIYider = FSCalendarStandardMonthlyPageHeight;
                 CGFloat contentHeight = self.transitionCoordinator.cachedMonthSize.height*(1-_showsScopeHandle*0.08);
-                _preferredWeekdayHeight = (FSCalendarStandardWeekdayHeight/DIYider)*contentHeight;
+                _preferredWeekdayHeight = (standardWeekdayHeight/DIYider)*contentHeight;
             } else {
-                _preferredWeekdayHeight = FSCalendarStandardWeekdayHeight*MAX(1, FSCalendarDeviceIsIPad*1.5);
+                _preferredWeekdayHeight = standardWeekdayHeight*MAX(1, FSCalendarDeviceIsIPad*1.5);
             }
         }
         return _preferredWeekdayHeight;
@@ -1378,7 +1393,13 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
         }
         
         if (!_calendarWeekdayView) {
-            FSCalendarWeekdayView *calendarWeekdayView = [[FSCalendarWeekdayView alloc] initWithFrame:CGRectZero];
+            FSCalendarWeekdayView *calendarWeekdayView;
+            if (self.dayHeaderButtonTitles.count == 7) {
+                calendarWeekdayView = [[FSCalendarWeekdayView alloc] initWithButtonTitles:self.dayHeaderButtonTitles frame:CGRectZero];
+            }
+            else {
+                calendarWeekdayView = [[FSCalendarWeekdayView alloc] initWithFrame:CGRectZero];
+            }
             calendarWeekdayView.calendar = self;
             [_contentView addSubview:calendarWeekdayView];
             _calendarWeekdayView = calendarWeekdayView;
@@ -1668,6 +1689,12 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     [self.visibleStickyHeaders makeObjectsPerformSelector:@selector(configureAppearance)];
     [self.calendarHeaderView configureAppearance];
     [self.calendarWeekdayView configureAppearance];
+}
+
+- (void)didTapWeekdayButton:(UIButton *)sender
+{
+    NSInteger index = ((FSCalendarWeekdayButton *)sender).index;
+    [self.delegateProxy calendarDidTapWeekdayButton:self index:index];
 }
 
 @end

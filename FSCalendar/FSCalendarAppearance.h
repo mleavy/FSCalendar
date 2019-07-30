@@ -59,6 +59,11 @@ typedef NS_OPTIONS(NSUInteger, FSCalendarCaseOptions) {
 @property (strong, nonatomic) UIFont   *weekdayFont;
 
 /**
+ * The font of the weekday header button.
+ */
+@property (strong, nonatomic) UIFont   *weekdayButtonFont;
+
+/**
  * The font of the month text.
  */
 @property (strong, nonatomic) UIFont   *headerTitleFont;
@@ -192,6 +197,22 @@ typedef NS_OPTIONS(NSUInteger, FSCalendarCaseOptions) {
  * The border radius, while 1 means a circle, 0 means a rectangle, and the middle value will give it a corner radius.
  */
 @property (assign, nonatomic) CGFloat borderRadius;
+
+/**
+ * The text color of the weekday button title.
+ */
+@property (strong, nonatomic) UIColor  *weekdayHeaderButtonTitleColor;
+
+/**
+ * The background color of the weekday button.
+ */
+@property (strong, nonatomic) UIColor  *weekdayHeaderButtonBackgroundColor;
+
+/**
+ * The amount of horizontal and vertical padding to apply to each side of the
+ * weekday button.
+ */
+@property (assign, nonatomic) CGFloat  weekdayHeaderButtonPadding;
 
 /**
  * The case options manage the case of month label and weekday symbols.

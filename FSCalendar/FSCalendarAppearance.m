@@ -33,6 +33,7 @@
         _titleFont = [UIFont systemFontOfSize:FSCalendarStandardTitleTextSize];
         _subtitleFont = [UIFont systemFontOfSize:FSCalendarStandardSubtitleTextSize];
         _weekdayFont = [UIFont systemFontOfSize:FSCalendarStandardWeekdayTextSize];
+        _weekdayButtonFont = [UIFont systemFontOfSize:FSCalendarStandardWeekdayButtonTextSize];
         _headerTitleFont = [UIFont systemFontOfSize:FSCalendarStandardHeaderTextSize];
         
         _headerTitleColor = FSCalendarStandardTitleTextColor;
@@ -70,6 +71,10 @@
         _eventSelectionColor = FSCalendarStandardEventDotColor;
         
         _borderColors = [NSMutableDictionary dictionaryWithCapacity:2];
+        
+        _weekdayHeaderButtonTitleColor = [UIColor whiteColor];
+        _weekdayHeaderButtonBackgroundColor = [UIColor blueColor];
+        _weekdayHeaderButtonPadding = 2;
         
 #if TARGET_INTERFACE_BUILDER
         _fakeEventDots = YES;
