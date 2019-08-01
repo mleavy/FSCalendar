@@ -77,6 +77,7 @@
         _weekdayHeaderButtonPadding = 2;
         _weekdayHeaderButtonDisabledAlpha = 0.1;
         _weekdayHeaderButtonDisabledText = nil;
+        _weekdayHeaderButtonAlwaysVisible = FALSE;
         
 #if TARGET_INTERFACE_BUILDER
         _fakeEventDots = YES;
@@ -85,7 +86,7 @@
     }
     return self;
 }
-
+    
 - (void)setTitleFont:(UIFont *)titleFont
 {
     if (![_titleFont isEqual:titleFont]) {
@@ -440,6 +441,14 @@
         [_calendar.collectionView.collectionViewLayout invalidateLayout];
     }
 }
+    
+//- (void) setWeekdayHeaderButtonDisabledText:(NSString *)weekdayHeaderButtonDisabledText {
+//    _weekdayHeaderButtonDisabledText = weekdayHeaderButtonDisabledText;
+//}
+//
+//- (NSString *) weekdayHeaderButtonDisabledText {
+//    return self.weekdayHeaderButtonDisabledText;
+//}
 
 @end
 

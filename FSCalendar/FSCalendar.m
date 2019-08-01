@@ -988,7 +988,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
 {
     if (_weekdayHeight == FSCalendarAutomaticDimension) {
         if (_preferredWeekdayHeight == FSCalendarAutomaticDimension) {
-            CGFloat standardWeekdayHeight = self.dayHeaderButtonTitles.count == 0 ? FSCalendarStandardWeekdayHeight : FSCalendarStandardWeekdayWithButtonsHeight;
+            CGFloat standardWeekdayHeight = (self.dayHeaderButtonTitles.count == 0 && !self.appearance.weekdayHeaderButtonAlwaysVisible) ? FSCalendarStandardWeekdayHeight : FSCalendarStandardWeekdayWithButtonsHeight;
             if (!self.floatingMode) {
                 CGFloat DIYider = FSCalendarStandardMonthlyPageHeight;
                 CGFloat contentHeight = self.transitionCoordinator.cachedMonthSize.height*(1-_showsScopeHandle*0.08);

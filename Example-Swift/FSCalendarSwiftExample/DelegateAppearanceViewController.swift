@@ -50,6 +50,7 @@ class DelegateAppearanceViewController: UIViewController, FSCalendarDataSource, 
         calendar.swipeToChooseGesture.isEnabled = true
         calendar.backgroundColor = UIColor.white
         calendar.appearance.caseOptions = [.headerUsesUpperCase,.weekdayUsesSingleUpperCase]
+        calendar.appearance.weekdayHeaderButtonAlwaysVisible = true
         self.view.addSubview(calendar)
         self.calendar = calendar
         calendar.select(self.dateFormatter1.date(from: "2015/10/03"))
@@ -58,6 +59,7 @@ class DelegateAppearanceViewController: UIViewController, FSCalendarDataSource, 
         
         // For UITest
         self.calendar.accessibilityIdentifier = "calendar"
+        self.calendar.reloadData()
     }
     
     deinit {

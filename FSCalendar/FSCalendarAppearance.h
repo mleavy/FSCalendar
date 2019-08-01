@@ -220,9 +220,14 @@ typedef NS_OPTIONS(NSUInteger, FSCalendarCaseOptions) {
 @property (assign, nonatomic) CGFloat  weekdayHeaderButtonDisabledAlpha;
 
 /**
- * The alpha value to apply to a disabled weekday button.
+ * The text to display in a disabled weekday button.
  */
-@property (assign, nonatomic) NSString*  weekdayHeaderButtonDisabledText;
+@property (strong, nonatomic) NSString*  weekdayHeaderButtonDisabledText;
+    
+/**
+ * The text to display in a disabled weekday button.
+ */
+@property (assign, nonatomic) BOOL  weekdayHeaderButtonAlwaysVisible;
 
 /**
  * The case options manage the case of month label and weekday symbols.

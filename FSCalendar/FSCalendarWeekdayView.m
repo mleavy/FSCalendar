@@ -131,7 +131,13 @@
         item.label.font = self.calendar.appearance.weekdayFont;
         item.label.textColor = self.calendar.appearance.weekdayTextColor;
         item.label.text = useDefaultWeekdayCase ? weekdaySymbols[index] : [weekdaySymbols[index] uppercaseString];
-        [item setButtonHidden:self.buttonTitles.count != 7];
+        if (self.calendar.appearance.weekdayHeaderButtonAlwaysVisible) {
+            [item setButtonHidden:FALSE];
+        }
+        else {
+            [item setButtonHidden:self.buttonTitles.count != 7];
+        }
+        
         NSString *buttonTitle = [self.buttonTitles objectAtIndex:i];
         if (buttonTitle != nil) {
             [item setButtonTitle:buttonTitle];
