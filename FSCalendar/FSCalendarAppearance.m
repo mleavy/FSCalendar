@@ -66,6 +66,9 @@
         _borderColors[@(FSCalendarCellStateSelected)] = [UIColor clearColor];
         _borderColors[@(FSCalendarCellStateNormal)] = [UIColor clearColor];
         
+        _calendarTopBorderColor = [UIColor clearColor];
+        _calendarBottomBorderColor = FSCalendarStandardLineColor;
+        
         _borderRadius = 1.0;
         _eventDefaultColor = FSCalendarStandardEventDotColor;
         _eventSelectionColor = FSCalendarStandardEventDotColor;
@@ -392,6 +395,16 @@
         _borderRadius = borderRadius;
         [self.calendar configureAppearance];
     }
+}
+
+- (void)setCalendarTopBorderColor:(UIColor *)calendarTopBorderColor {
+    _calendarTopBorderColor = calendarTopBorderColor;
+    [self.calendar configureAppearance];
+}
+
+- (void)setCalendarBottomBorderColor:(UIColor *)calendarBottomBorderColor {
+    _calendarBottomBorderColor = calendarBottomBorderColor;
+    [self.calendar configureAppearance];
 }
 
 - (void)setWeekdayTextColor:(UIColor *)weekdayTextColor

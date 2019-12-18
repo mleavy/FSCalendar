@@ -599,6 +599,9 @@ IB_DESIGNABLE
 @property (strong, nonatomic) IBInspectable UIColor *borderDefaultColor;
 @property (strong, nonatomic) IBInspectable UIColor *borderSelectionColor;
 
+@property (strong, nonatomic) IBInspectable UIColor  *calendarTopBorderColor;
+@property (strong, nonatomic) IBInspectable UIColor  *calendarBottomBorderColor;
+
 @property (assign, nonatomic) IBInspectable CGFloat borderRadius;
 @property (assign, nonatomic) IBInspectable BOOL    useVeryShortWeekdaySymbols;
 

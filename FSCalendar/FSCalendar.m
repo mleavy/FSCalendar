@@ -238,7 +238,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
         self.topBorder = view;
         
         view = [[UIView alloc] initWithFrame:CGRectZero];
-        view.backgroundColor = FSCalendarStandardLineColor;
+        view.backgroundColor = _appearance.calendarBottomBorderColor;// FSCalendarStandardLineColor;
         view.autoresizingMask = UIViewAutoresizingFlexibleTopMargin; // Stick to bottom
         [self addSubview:view];
         self.bottomBorder = view;
@@ -1689,6 +1689,8 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     [self.visibleStickyHeaders makeObjectsPerformSelector:@selector(configureAppearance)];
     [self.calendarHeaderView configureAppearance];
     [self.calendarWeekdayView configureAppearance];
+    self.topBorder.backgroundColor = self.appearance.calendarTopBorderColor;
+    self.bottomBorder.backgroundColor = self.appearance.calendarBottomBorderColor;
 }
 
 - (void)didTapWeekdayButton:(UIButton *)sender

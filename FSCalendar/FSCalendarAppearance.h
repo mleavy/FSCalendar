@@ -199,6 +199,16 @@ typedef NS_OPTIONS(NSUInteger, FSCalendarCaseOptions) {
 @property (assign, nonatomic) CGFloat borderRadius;
 
 /**
+ * The top border color of the calendar view.
+ */
+@property (strong, nonatomic) UIColor  *calendarTopBorderColor;
+
+/**
+ * The bottom border color of the calendar view.
+ */
+@property (strong, nonatomic) UIColor  *calendarBottomBorderColor;
+
+/**
  * The text color of the weekday button title.
  */
 @property (strong, nonatomic) UIColor  *weekdayHeaderButtonTitleColor;
