@@ -10,14 +10,6 @@ let package = Package(
         .library(name: "FSCalendar", targets: ["FSCalendar"])
     ],
     targets: [
-        .target(
-           name: "FSCalendar", // 1
-           dependencies: [], // 2
-           path: "FSCalendar/", // 3
-           exclude: ["Swift"], // 4
-           cSettings: [
-              .headerSearchPath("Internal"), // 5
-           ]
-        )
+        .target(name: "FSCalendar", path: "FSCalendar")
     ]
 )
