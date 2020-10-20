@@ -10,6 +10,11 @@ let package = Package(
         .library(name: "FSCalendar", targets: ["FSCalendar"])
     ],
     targets: [
-        .target(name: "FSCalendar", path: "FSCalendar", publicHeadersPath: "FSCalendar")
+        .target(name: "FSCalendar",
+                path: "FSCalendar",
+                cSettings: [
+                        .headerSearchPath("FSCalendar"),
+                    ]
+                )
     ]
 )
