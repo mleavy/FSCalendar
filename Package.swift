@@ -11,18 +11,13 @@ let package = Package(
     ],
     targets: [
         .target(
-           name: "FSCalendar-ObjC", // 1
+           name: "FSCalendar", // 1
            dependencies: [], // 2
            path: "FSCalendar/", // 3
            exclude: ["Swift"], // 4
            cSettings: [
               .headerSearchPath("Internal"), // 5
            ]
-        ),
-        .target(
-           name: "FSCalendar", // 6
-           dependencies: ["FSCalendar-ObjC"], // 7
-           path: "Swift" // 8
         )
     ]
 )
