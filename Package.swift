@@ -10,6 +10,6 @@ let package = Package(
         .library(name: "FSCalendar", targets: ["FSCalendar"])
     ],
     targets: [
-        .target(name: "FSCalendar", path: "FSCalendar")
+        .target(name: "FSCalendar", path: "FSCalendar", publicHeadersPath: "FSCalendar")
     ]
 )
