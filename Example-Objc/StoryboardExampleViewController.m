@@ -54,18 +54,18 @@
         
         self.calendar.appearance.caseOptions = FSCalendarCaseOptionsHeaderUsesUpperCase|FSCalendarCaseOptionsWeekdayUsesUpperCase;
         
-        self.datesShouldNotBeSelected = @[@"2016/08/07",
-                                          @"2016/09/07",
-                                          @"2016/10/07",
-                                          @"2016/11/07",
-                                          @"2016/12/07",
-                                          @"2016/01/07",
-                                          @"2016/02/07"];
+        self.datesShouldNotBeSelected = @[@"2020/08/07",
+                                          @"2020/09/07",
+                                          @"2020/10/07",
+                                          @"2020/11/07",
+                                          @"2020/12/07",
+                                          @"2020/01/07",
+                                          @"2020/02/07"];
         
-        self.datesWithEvent = @[@"2016-12-03",
-                                @"2016-12-07",
-                                @"2016-12-15",
-                                @"2016-12-25"];
+        self.datesWithEvent = @[@"2020-12-03",
+                                @"2020-12-07",
+                                @"2020-12-15",
+                                @"2020-12-25"];
         
         self.lunarFormatter = [[LunarFormatter alloc] init];
     }
@@ -81,7 +81,8 @@
     if ([[UIDevice currentDevice].model hasPrefix:@"iPad"]) {
         self.calendarHeightConstraint.constant = 400;
     }
-    [self.calendar selectDate:[self.dateFormatter1 dateFromString:@"2016/12/05"] scrollToDate:YES];
+    self.calendar.today = [self.dateFormatter1 dateFromString:@"2020/11/19"];
+//    [self.calendar selectDate:[self.dateFormatter1 dateFromString:@"2020/11/09"] scrollToDate:YES];
     
     self.calendar.accessibilityIdentifier = @"calendar";
     
@@ -117,12 +118,12 @@
 
 - (NSDate *)minimumDateForCalendar:(FSCalendar *)calendar
 {
-    return [self.dateFormatter1 dateFromString:@"2016/10/01"];
+    return [self.dateFormatter1 dateFromString:@"2020/10/01"];
 }
 
 - (NSDate *)maximumDateForCalendar:(FSCalendar *)calendar
 {
-    return [self.dateFormatter1 dateFromString:@"2018/05/31"];
+    return [self.dateFormatter1 dateFromString:@"2023/05/31"];
 }
 
 #pragma mark - FSCalendarDelegate
@@ -151,12 +152,6 @@
 - (void)calendarCurrentPageDidChange:(FSCalendar *)calendar
 {
     NSLog(@"did change to page %@",[self.dateFormatter1 stringFromDate:calendar.currentPage]);
-}
-
-- (void)calendar:(FSCalendar *)calendar boundingRectWillChange:(CGRect)bounds animated:(BOOL)animated
-{
-    _calendarHeightConstraint.constant = CGRectGetHeight(bounds);
-    [self.view layoutIfNeeded];
 }
 
 - (CGPoint)calendar:(FSCalendar *)calendar appearance:(FSCalendarAppearance *)appearance titleOffsetForDate:(NSDate *)date
@@ -214,12 +209,8 @@
     if (self.calendar.firstWeekday != config.firstWeekday) {
         self.calendar.firstWeekday = config.firstWeekday;
     }
-    
     if (self.calendar.scrollDirection != config.scrollDirection) {
         self.calendar.scrollDirection = config.scrollDirection;
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"FSCalendar" message:[NSString stringWithFormat:@"Now swipe %@",@[@"Vertically", @"Horizontally"][self.calendar.scrollDirection]] preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 
