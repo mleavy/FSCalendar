@@ -1577,15 +1577,15 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     [self.visibleStickyHeaders makeObjectsPerformSelector:@selector(configureAppearance)];
     [self.calendarHeaderView configureAppearance];
     [self.calendarWeekdayView configureAppearance];
-    self.topBorder.backgroundColor = self.appearance.calendarTopBorderColor;
-    self.bottomBorder.backgroundColor = self.appearance.calendarBottomBorderColor;
+//    self.topBorder.backgroundColor = self.appearance.calendarTopBorderColor;
+//    self.bottomBorder.backgroundColor = self.appearance.calendarBottomBorderColor;
 }
 
-- (void)didTapWeekdayButton:(UIButton *)sender
-{
-    NSInteger index = ((FSCalendarWeekdayButton *)sender).index;
-    [self.delegateProxy calendarDidTapWeekdayButton:self index:index];
-}
+//- (void)didTapWeekdayButton:(UIButton *)sender
+//{
+//    NSInteger index = ((FSCalendarWeekdayButton *)sender).index;
+//    [self.delegateProxy calendarDidTapWeekdayButton:self index:index];
+//}
 
 - (void)adjustBoundingRectIfNecessary
 {
