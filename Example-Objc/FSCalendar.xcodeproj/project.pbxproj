@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C8633CB25B8D9CC00D46D9F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1C8633CA25B8D9CC00D46D9F /* Info.plist */; };
 		30024F951BD1015300B1C04C /* DelegateAppearanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30024F941BD1015300B1C04C /* DelegateAppearanceViewController.m */; };
 		30145EF11D6D754D00AA5F72 /* FSCalendarTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EE638CF51B8A1F550006DD1A /* FSCalendarTests.m */; };
 		301F79CB1DFD39E700D8631E /* FSCalendarDelegationProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 301F79C91DFD39E700D8631E /* FSCalendarDelegationProxy.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -119,6 +120,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1C8633CA25B8D9CC00D46D9F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30024F931BD1015300B1C04C /* DelegateAppearanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelegateAppearanceViewController.h; sourceTree = SOURCE_ROOT; };
 		30024F941BD1015300B1C04C /* DelegateAppearanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelegateAppearanceViewController.m; sourceTree = SOURCE_ROOT; };
 		301F79C91DFD39E700D8631E /* FSCalendarDelegationProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSCalendarDelegationProxy.h; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				309225381B905C4300123031 /* FSCalendarConstants.h */,
 				309225391B905C4300123031 /* FSCalendarConstants.m */,
 				30B0BAC51B8D8E22004B9476 /* FSCalendarDynamicHeader.h */,
+				1C8633CA25B8D9CC00D46D9F /* Info.plist */,
 			);
 			name = FSCalendar;
 			path = ../FSCalendar;
@@ -623,6 +626,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C8633CB25B8D9CC00D46D9F /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
